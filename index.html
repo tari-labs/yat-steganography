@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
+	<title>Yattoo: Encoding Yat in Images</title>
+	<meta content="noindex, nofollow" name="robots">
+	<meta content="Sean O'Brien" name="author">
+	<meta content="This demo uses steganography to encode a Yat in an image.">
+	<meta charset="utf-8">
+	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+	<style>
+	              body, html {
+					margin:0;
+					padding:0;
+					font-family:Arial,sans-serif;
+					color:#fff;
+					background-color:#090719
+	              }
+	              h1 {
+					color:#fff;
+					margin-bottom:10px;
+	              }
+	              #main {
+					position:relative;
+					width:940px;
+					padding:20px;
+					margin:auto;
+	              }
+	              #right {
+					position:relative;
+					float:left;
+					margin:12px;
+					width:600px;
+					vertical-align:top;
+	              }
+	              #left {
+					position:relative;
+					float:left;
+					width:260px;
+					padding:12px;
+					margin-right:10px;
+					border-radius:6px;
+					border:3px solid #523df1;
+	              }
+	              .half {
+					position:relative;
+					display:inline-block;
+					width:49%;
+	              }
+	              #original {
+					vertical-align:top;
+	              }
+	              #messageArea {
+					width:100%;
+	              }
+	              #img, #cover {
+					width:220px;
+	              }
+	              .btns {
+					margin-top:15px;
+					margin-bottom:10px;
+					padding: 0 40px;
+	              }
+	              .btn {
+					padding:10px 20px 10px 20px;
+					-moz-border-radius:15px;
+					-o-border-radius:15px;
+					-webkit-border-radius:15px;
+					border-radius:15px;
+					border:2px solid #523df1;
+					cursor:pointer;
+					color:#fff;
+					background-color:#523df1;
+					width:50px;
+					text-align:center;
+	              }
+	              .btn:hover {
+					color:#fff;
+					background-color:#af0398;
+					border-color:#af0398
+	              }
+	              #download {
+					position:absolute;
+					top:47px;
+					left:4px;
+					padding:10px 5px 5px 3px;
+					width:110px;
+					border-top:1px solid #523df1;
+					-moz-border-radius:0 0 15px 15px;
+					-o-border-radius:0 0 15px 15px;
+					-webkit-border-radius:0 0 15px 15px;
+					border-radius:0 0 15px 15px;
+					text-decoration:none;
+					color:#fff;
+	              }
+	              #download:hover {
+					border-top:1px solid #af0398;
+					color:#fff;
+					width:110px;
+	              }
+	              #description {
+					color:#ccc;
+					line-height:25px;
+					padding-bottom:5px;
+					margin-bottom:24px;
+	              }
+	              .note {
+					font-size:9px;
+					text-align:center;
+					color:#fff;
+	              }
+	              .invisible {
+					visibility:hidden;
+	              }
+	              .clear {
+					clear:both;
+	              }
+	              .footer {
+					margin-top:25px;
+					width:100%;
+					text-align:right;
+	              }
+	              .footer:hover {
+					opacity:.8;
+	              }
+	              textarea{
+					width:200px;
+					padding:10px;
+					height:48px;
+					resize:none;
+					font-size:1.8em;
+					background:#000;
+					border-radius:6px;
+					border:2px solid #af0398;
+	              }
+	              h2{
+					margin-top:0;
+	              }
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h1>Yattoo: Encoding Yat in Images</h1>
+		<div id="description">
+			This demo uses steganography to encode a Yat in an image. It is fully client-side and in-browser, utilizing JavaScript and the HTML5 Canvas element to write to the alpha channel of the image. This technique opens a wide variety of use cases for Yat in watermarking, identification, authentication, or new NFT products such as Yat-branded Gems or PFPs. Steganography can also be accomplished via least-significant bit (LSB) or F5 algorithm depending on use-case and security requirements.
+		</div>
+		<div id="left">
+			<h2>Choose Image:</h2><input id="file" type="file"><br>
+			<h2 style="margin-top:24px;">Yat:</h2>
+			<textarea cols="5" id="text" maxlength="5" rows="5">✨✨🐔✨✨</textarea>
+			<div class="btns">
+				<span class="btn" id="hide">Write</span> <span class="btn" id="read">Read</span>
+			</div>
+		</div>
+		<div id="right">
+			<div class="half" id="original">
+			<h2>Plain Image:</h2><img id="img" src="img/chicken.png"></div>
+			<div class="half" id="stego">
+				<h2>Encoded Image:</h2><img id="cover" src=""> <a class="btn small" id="download" rel="nofollow"><strong>🔻 Download</strong></a>
+				<div class="note">
+					If button does not work, right-click to download
+				</div>
+			</div>
+			<div class="invisible" id="messageArea">
+				<h2>Yat:</h2>
+				<div id="message"></div>
+			</div>
+		</div>
+		<div class="clear"></div>
+		<div class="footer"><a href="https://y.at" target="_blank"><img src="img/logo-yat-white.png"></a></div>
+	</div>
+	<script src="js/steganography.js" type="text/javascript">
+	</script> 
+	<script type="text/javascript">
+
+	          function handleFileSelect(evt) {
+	              var original = document.getElementById("original"),
+					stego = document.getElementById("stego"),
+					img = document.getElementById("img"),
+					cover = document.getElementById("cover"),
+					message = document.getElementById("message");
+	              if(!original || !stego) return;
+
+	              var files = evt.target.files; // FileList object
+
+	              // Loop through FileList and render image files as thumbnails
+	              for (var i = 0, f; f = files[i]; i++) {
+
+					// Only process image files
+					if (!f.type.match('image.*')) {
+					    continue;
+					}
+
+					var reader = new FileReader();
+
+					// Capture the file information
+					reader.onload = (function(theFile) {
+					    return function(e) {
+					        img.src = e.target.result;
+					        img.title = escape(theFile.name);
+					        stego.className = "half invisible";
+					        cover.src = "";
+					        message.innerHTML="";
+					        message.parentNode.className="invisible";
+					        updateCapacity();
+					    };
+					})(f);
+
+					// Read the image file as a data URL
+					reader.readAsDataURL(f);
+	              }
+	          }
+
+	          function hide() {
+	              var stego = document.getElementById("stego"),
+					img = document.getElementById("img"),
+					cover = document.getElementById("cover"),
+					message = document.getElementById("message"),
+					textarea = document.getElementById("text"),
+					download = document.getElementById("download");
+	              if(img && textarea) {
+					cover.src = steg.encode(textarea.value, img);
+					stego.className = "half";
+					message.innerHTML="";
+					message.parentNode.className="invisible";
+					download.href=cover.src.replace("image/png", "image/octet-stream");
+	              }
+	          }
+
+	          function read() {
+	              var img = document.getElementById("img"),
+					cover = document.getElementById("cover"),
+					message = document.getElementById("message"),
+					textarea = document.getElementById("text");
+	              if(img && textarea) {
+					message.innerHTML = steg.decode(img);
+					if(message.innerHTML !== "") {
+					    message.parentNode.className="";
+					    textarea.value = message.innerHTML;
+					    updateCapacity();
+					}
+	              }
+	          }
+
+	          function updateCapacity() {
+	              var img = document.getElementById('img'),
+					textarea = document.getElementById('text');
+	              if(img && text)
+					document.getElementById('capacity').innerHTML='('+textarea.value.length + '/' + steg.getHidingCapacity(img) +' chars)';
+	          }
+
+	          window.onload = function(){
+	              document.getElementById('file').addEventListener('change', handleFileSelect, false);
+	              document.getElementById('hide').addEventListener('click', hide, false);
+	              document.getElementById('read').addEventListener('click', read, false);
+	              document.getElementById('text').addEventListener('keyup', updateCapacity, false);
+	              hide();
+	              updateCapacity();
+	          };
+	</script>
+</body>
+</html>
