@@ -12,7 +12,7 @@ This demo uses steganography to encode a [Yat](https://y.at) in an image. It is 
 
 ### Why use steganography?
 
-Information hidden with steganography is easy to extract, if you are aware of its existence. A person's Yat can be embedded inside their artwork, for example, and used as the artist's signature. Apps can read these Yat identities and attribute the artwork to the artist.
+Information hidden with steganography is easy to extract, if you are aware of its existence. A person's Yat can be embedded inside their artwork, for example, and used as the artist's signature. Apps can read this Yat identity and attribute the artwork to the artist.
 
 Steganography may also be used alongside cryptography to strengthen the confidentiality and integrity of information. Messages hidden by steganography techniques do not immediately attract attention and those messages can, in turn, be encrypted and verifiable. Data can be hidden "in plain view", so to speak, and the author or owner can be confirmed.
 
