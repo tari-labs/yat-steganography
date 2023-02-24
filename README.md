@@ -33,6 +33,7 @@ Potential use cases are:
 * Encoding secret messages for specific Yat owners
 * Generative NFTs linked to Yat identity
 * Identifying clones, remixes, and counterfeit NFTs
+* Conveying authorship and licensing terms
 
 All of these use cases require development beyond this simple demo, which uses the simple [steganography.js](https://github.com/petereigenschink/steganography.js/) library. Additional hashing and cryptography techniques would be needed for use cases that require strong confidentiality and verification of identity.
 

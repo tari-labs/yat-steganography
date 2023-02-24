@@ -4,7 +4,7 @@
 	<meta content="text/html; charset=utf-8" http-equiv="content-type">
 	<title>Yattoo: Encoding Yat in Images</title>
 	<meta content="noindex, nofollow" name="robots">
-	<meta content="Sean O'Brien" name="author">
+	<meta content="Sean O'Brien https://github.com/seandiggity" name="author">
 	<meta content="This demo uses steganography to encode a Yat in an image.">
 	<meta charset="utf-8">
 	<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
@@ -122,6 +122,10 @@
 					width:100%;
 					text-align:right;
 	              }
+	              .footer img {
+					margin-left:25px;
+					border: none;
+	              }
 	              .footer:hover {
 					opacity:.8;
 	              }
@@ -156,9 +160,9 @@
 		</div>
 		<div id="right">
 			<div class="half" id="original">
-			<h2>Plain Image:</h2><img id="img" src="img/chicken.png"></div>
+			<h2>Plain Image:</h2><img id="img" src="img/chicken.png" alt="Plain Image"></div>
 			<div class="half" id="stego">
-				<h2>Encoded Image:</h2><img id="cover" src=""> <a class="btn small" id="download" rel="nofollow"><strong>🔻 Download</strong></a>
+				<h2>Encoded Image:</h2><img id="cover" src="" alt="Encoded Image"> <a class="btn small" id="download" rel="nofollow"><strong>🔻 Download</strong></a>
 				<div class="note">
 					If button does not work, right-click to download
 				</div>
@@ -169,7 +173,7 @@
 			</div>
 		</div>
 		<div class="clear"></div>
-		<div class="footer"><a href="https://y.at" target="_blank"><img src="img/logo-yat-white.png"></a></div>
+		<div class="footer"><a href="https://github.com/tari-labs/yat-steganography" target="_blank"><img src="img/github-mark-white.png" alt="Github"></a><a href="https://y.at" target="_blank"><img src="img/logo-yat-white.png" alt="Yat"></a></div>
 	</div>
 	<script src="js/steganography.js" type="text/javascript">
 	</script> 
