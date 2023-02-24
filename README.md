@@ -2,9 +2,9 @@
 
 Embed a Yat into an image using steganography techniques
 
-<img src="img/screenshot.png" width="600" />
+<img src="img/screenshot.png" width="660" />
 
-This demo uses steganography to encode a [Yat](https://y.at) in an image. It is fully client-side and in-browser, utilizing JavaScript and the HTML5 Canvas element to write to the alpha channel of the image. This technique opens a wide variety of use cases for Yat in watermarking, identification, authentication, or new NFT products such as Yat-branded Gems or PFPs. Steganography can also be accomplished via least-significant bit (LSB) or F5 algorithm depending on use-case and security requirements.
+This demo uses steganography to encode a [Yat](https://y.at) in an image. It is fully client-side and in-browser, utilizing JavaScript and the HTML5 Canvas element to write to the alpha channel of the image. This technique opens a wide variety of use cases for Yat in watermarking, identification, authentication, or new NFT products such as Yat-branded Gems or PFPs.
 
 ### What is steganography?
 
@@ -35,13 +35,13 @@ Potential use cases are:
 * Identifying clones, remixes, and counterfeit NFTs
 * Conveying authorship and licensing terms
 
-All of these use cases require development beyond this simple demo, which uses the simple [steganography.js](https://github.com/petereigenschink/steganography.js/) library. Additional hashing and cryptography techniques would be needed for use cases that require strong confidentiality and verification of identity.
+All of these use cases require development beyond this simple demo, which uses the [steganography.js](https://github.com/petereigenschink/steganography.js/) library. Additional hashing and cryptography techniques would be needed for use cases that require strong confidentiality and verification of identity.
 
 ### Additional methods
 
-Steganography can also be accomplished via least-significant bit (LSB) or F5 algorithm depending on use-case and security requirements. For JavaScript implementations, see [this LSB example](https://github.com/thavixt/steganography-js) and [this F5 example](https://github.com/desudesutalk/f5stegojs).
+Steganography can also be accomplished via least-significant bit (LSB) or F5 algorithm depending on the use case and security requirements. For JavaScript implementations, see [this LSB example](https://github.com/thavixt/steganography-js) and [this F5 example](https://github.com/desudesutalk/f5stegojs).
 
-### In the Wild
+### In the wild
 [CjS77](https://github.com/CjS77) describes an [excellent example](https://github.com/tari-labs/yat-steganography/issues/1) of steganography usage within an [NFT collection](https://opensea.io/collection/seven-5iwat2ntvf). As this example proves, steganography can be used not only for an artist's signature but also to identify clones, remixes, or counterfeit NFTs.
 
 ## Licensing
